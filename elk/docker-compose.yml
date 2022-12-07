@@ -26,7 +26,7 @@ services:
     volumes:
       - elastic:/usr/share/elasticsearch/data
     ports:
-      - 127.0.0.1:9200:9200
+      - 9200:9200
     labels:
       - "kind=elastic"
     networks:
@@ -50,7 +50,7 @@ services:
     labels:
       - "kind=elastic"
     ports:
-      - 127.0.0.1:5601:80
+      - 5601:80
     networks:
       elastic:
         aliases:
