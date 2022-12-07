@@ -1,0 +1,38 @@
+version: '2.2'
+services:
+  pgsql:
+    image: postgres:latest
+    container_name: pgsql
+    restart: always
+    environment:
+      - POSTGRES_USER=pgsql
+      - POSTGRES_PASSWORD=PgSq1
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - pgsql:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    labels:
+      - "kind=pgsql"
+    networks:
+      elastic:
+          aliases:
+              - "pgsql"
+      common:
+          ipv4_address: 192.168.69.111
+      
+volumes:
+  pgsql:
+    external: true
+
+networks:
+  elastic:
+     driver: bridge
+  common:
+     external: true
